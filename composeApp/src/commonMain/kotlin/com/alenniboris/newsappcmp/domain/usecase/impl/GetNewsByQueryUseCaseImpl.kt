@@ -1,6 +1,7 @@
 package com.alenniboris.newsappcmp.domain.usecase.impl
 
 import com.alenniboris.newsappcmp.domain.model.ArticleModelDomain
+import com.alenniboris.newsappcmp.domain.model.CommonExceptionModelDomain
 import com.alenniboris.newsappcmp.domain.model.CustomResultModelDomain
 import com.alenniboris.newsappcmp.domain.model.IAppDispatchers
 import com.alenniboris.newsappcmp.domain.repository.INewsRepository
@@ -14,9 +15,10 @@ class GetNewsByQueryUseCaseImpl(
 
     override suspend fun invoke(
         query: String
-    ): CustomResultModelDomain<List<ArticleModelDomain>, Throwable> = withContext(dispatchers.IO) {
-        return@withContext newsRepository.getNewsByQuery(
-            query = query
-        )
-    }
+    ): CustomResultModelDomain<List<ArticleModelDomain>, CommonExceptionModelDomain> =
+        withContext(dispatchers.IO) {
+            return@withContext newsRepository.getNewsByQuery(
+                query = query
+            )
+        }
 }

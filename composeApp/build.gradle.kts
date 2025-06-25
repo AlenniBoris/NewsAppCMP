@@ -1,6 +1,7 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -8,25 +9,50 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
+    kotlin("plugin.serialization") version "2.2.0"
 }
 
 kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget.set(JvmTarget.JVM_21)
         }
     }
-    
+
     jvm("desktop")
-    
+
     sourceSets {
         val desktopMain by getting
-        
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+
+            // Koin
+            implementation("io.insert-koin:koin-android")
+            implementation("io.insert-koin:koin-androidx-compose")
+
+            //Ktor
+            implementation("io.ktor:ktor-client-okhttp:3.2.0")
         }
+        android {
+            buildFeatures {
+                buildConfig = true
+            }
+            defaultConfig {
+                val apikeys = Properties().apply {
+                    val file = rootProject.file("apikeys.properties")
+                    if (file.exists()) {
+                        load(file.inputStream())
+                    }
+                }
+
+                val apiKey: String = apikeys.getProperty("NEWS_API_KEY") ?: ""
+                buildConfigField("String", "NEWS_API_KEY", apiKey)
+            }
+        }
+
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -36,6 +62,23 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+
+            // Koin
+            implementation(project.dependencies.platform("io.insert-koin:koin-bom:4.1.0"))
+            implementation("io.insert-koin:koin-core")
+
+            // Ktor
+            implementation("io.ktor:ktor-client-core:3.2.0")
+            implementation("io.ktor:ktor-client-content-negotiation:3.2.0")
+            implementation("io.ktor:ktor-serialization-kotlinx-json:3.2.0")
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
+            implementation("io.ktor:ktor-client-logging:3.2.0")
+
+            //Napier
+            implementation("io.github.aakira:napier:2.7.1")
+
+            // Time parse
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.7.0")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -43,18 +86,28 @@ kotlin {
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
+
+            // Ktor
+            implementation("io.ktor:ktor-client-apache:3.2.0")
+            implementation("io.ktor:ktor-client-logging-jvm:3.2.0")
+
+            implementation("androidx.collection:collection:1.5.0")
+
+            implementation("org.slf4j:slf4j-simple:2.0.17")
+
+            implementation("io.insert-koin:koin-core-jvm")
         }
     }
 }
 
 android {
     namespace = "com.alenniboris.newsappcmp"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.alenniboris.newsappcmp"
-        minSdk = libs.versions.android.minSdk.get().toInt()
-        targetSdk = libs.versions.android.targetSdk.get().toInt()
+        minSdk = 35
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
     }
@@ -69,8 +122,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 }
 
