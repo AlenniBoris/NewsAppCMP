@@ -14,10 +14,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
 
-            val repos = koinInject<INewsRepository>()
-            App(
-                repository = repos
-            )
+            App()
         }
     }
 }

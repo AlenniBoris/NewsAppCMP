@@ -34,7 +34,7 @@ kotlin {
             implementation("io.insert-koin:koin-androidx-compose")
 
             //Ktor
-            implementation("io.ktor:ktor-client-okhttp:3.2.0")
+            implementation("io.ktor:ktor-client-android:3.2.0")
         }
         android {
             buildFeatures {
@@ -79,6 +79,11 @@ kotlin {
 
             // Time parse
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.7.0")
+
+            // Voyager
+            implementation("cafe.adriel.voyager:voyager-navigator:1.1.0-beta02")
+            implementation("cafe.adriel.voyager:voyager-tab-navigator:1.1.0-beta02")
+            implementation("cafe.adriel.voyager:voyager-transitions:1.1.0-beta02")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -91,11 +96,17 @@ kotlin {
             implementation("io.ktor:ktor-client-apache:3.2.0")
             implementation("io.ktor:ktor-client-logging-jvm:3.2.0")
 
+            // Collection
             implementation("androidx.collection:collection:1.5.0")
 
+            // Slf4j
             implementation("org.slf4j:slf4j-simple:2.0.17")
 
+            // Koin core
             implementation("io.insert-koin:koin-core-jvm")
+
+            // Icons
+            implementation("androidx.compose.material3:material3:1.3.2")
         }
     }
 }

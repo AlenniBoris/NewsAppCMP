@@ -1,7 +1,7 @@
 package com.alenniboris.newsappcmp.data.source.remote
 
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.DEFAULT
 import io.ktor.client.plugins.logging.LogLevel
@@ -12,7 +12,7 @@ import kotlinx.serialization.json.Json
 
 actual class KtorClientFactory {
     actual fun createClient(): HttpClient {
-        return HttpClient(OkHttp) {
+        return HttpClient(Android) {
             install(ContentNegotiation) {
                 json(Json { ignoreUnknownKeys = true })
             }

@@ -28,14 +28,10 @@ fun main() = application {
     }
     Napier.base(DebugAntilog())
 
-    val repos = remember { getKoin().get<INewsRepository>() }
-
     Window(
         onCloseRequest = ::exitApplication,
         title = "NewsAppCMP",
     ) {
-        App(
-            repository = repos
-        )
+        App()
     }
 }
