@@ -66,6 +66,7 @@ kotlin {
             // Koin
             implementation(project.dependencies.platform("io.insert-koin:koin-bom:4.1.0"))
             implementation("io.insert-koin:koin-core")
+            implementation("io.insert-koin:koin-compose")
 
             // Ktor
             implementation("io.ktor:ktor-client-core:3.2.0")
@@ -84,6 +85,13 @@ kotlin {
             implementation("cafe.adriel.voyager:voyager-navigator:1.1.0-beta02")
             implementation("cafe.adriel.voyager:voyager-tab-navigator:1.1.0-beta02")
             implementation("cafe.adriel.voyager:voyager-transitions:1.1.0-beta02")
+
+            // Coil
+            implementation("io.coil-kt.coil3:coil-compose:3.2.0")
+            implementation("io.coil-kt.coil3:coil-network-okhttp:3.2.0")
+
+            //Gson
+            implementation("com.google.code.gson:gson:2.9.0")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

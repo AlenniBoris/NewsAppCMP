@@ -33,9 +33,9 @@ class SavedScreen : Screen {
             Button(
                 modifier = Modifier.padding(top = 15.dp),
                 onClick = {
-                    navigator?.push(
-                        DetailsScreen(id = "15")
-                    )
+//                    navigator?.push(
+//                        DetailsScreen(id = "15")
+//                    )
                 },
                 content = {
                     Text(

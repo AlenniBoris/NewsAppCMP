@@ -14,7 +14,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 
 data class DetailsScreen(
-    val id: String
+    val articleJson: String
 ) : Screen {
 
     @Composable
@@ -28,7 +28,7 @@ data class DetailsScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Details, id = $id"
+                text = "Details, article = $articleJson"
             )
             Button(
                 modifier = Modifier.padding(top = 15.dp),

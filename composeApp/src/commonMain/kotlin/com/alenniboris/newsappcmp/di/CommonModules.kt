@@ -4,5 +4,6 @@ val commonModules = listOf(
     dispatchersModule,
     repositoryModule,
     useCaseModule,
-    netModule
+    netModule,
+    viewModelsModule
 )
