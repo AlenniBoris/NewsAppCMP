@@ -1,9 +1,8 @@
-package com.alenniboris.newsappcmp.presentation.navigation
+package com.alenniboris.newsappcmp.presentation.screens.navigation
 
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.core.screen.uniqueScreenKey
-import com.alenniboris.newsappcmp.presentation.news.views.NewsScreen
-import com.alenniboris.newsappcmp.presentation.saved.views.SavedScreen
+import com.alenniboris.newsappcmp.presentation.screens.news.views.NewsScreen
+import com.alenniboris.newsappcmp.presentation.screens.saved.views.SavedScreen
 import newsappcmp.composeapp.generated.resources.Res
 import newsappcmp.composeapp.generated.resources.news_screen
 import newsappcmp.composeapp.generated.resources.news_screen_active

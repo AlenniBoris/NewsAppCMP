@@ -1,4 +1,4 @@
-package com.alenniboris.newsappcmp.presentation.news.views
+package com.alenniboris.newsappcmp.presentation.screens.news.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,11 +16,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.alenniboris.newsappcmp.presentation.news.INewsScreenIntent
-import com.alenniboris.newsappcmp.presentation.news.Topic
+import com.alenniboris.newsappcmp.presentation.screens.news.INewsScreenIntent
+import com.alenniboris.newsappcmp.presentation.screens.news.Topic
 
 @Composable
 fun NewsTopicsRow(

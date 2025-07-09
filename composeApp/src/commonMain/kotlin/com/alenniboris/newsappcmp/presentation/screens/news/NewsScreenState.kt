@@ -1,11 +1,11 @@
-package com.alenniboris.newsappcmp.presentation.news
+package com.alenniboris.newsappcmp.presentation.screens.news
 
-import com.alenniboris.newsappcmp.domain.model.ArticleModelDomain
+import com.alenniboris.newsappcmp.presentation.model.ArticleModelUi
 
 data class NewsScreenState(
     val listOfTopics: List<Topic> = allTopics,
     val initialListOfTopics: List<Topic> = allTopics,
-    val articles: List<ArticleModelDomain> = emptyList(),
+    val articles: List<ArticleModelUi> = emptyList(),
     val isLoading: Boolean = false,
     val query: String = "",
     val isSearchBarActive: Boolean = false,

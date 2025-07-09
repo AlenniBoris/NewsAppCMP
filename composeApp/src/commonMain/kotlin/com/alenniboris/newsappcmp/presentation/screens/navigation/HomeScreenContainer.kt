@@ -1,4 +1,4 @@
-package com.alenniboris.newsappcmp.presentation.navigation
+package com.alenniboris.newsappcmp.presentation.screens.navigation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
-import com.alenniboris.newsappcmp.presentation.news.views.NewsScreen
+import com.alenniboris.newsappcmp.presentation.screens.news.views.NewsScreen
 import io.github.aakira.napier.Napier
 import org.jetbrains.compose.resources.painterResource
 

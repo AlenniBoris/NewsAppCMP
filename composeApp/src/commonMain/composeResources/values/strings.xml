@@ -1,0 +1,10 @@
+<resources>
+
+    <string name="nothing_found_text">Nothing found</string>
+    <string name="top_bar_left_btn_description">tob bar left btn</string>
+    <string name="top_bar_right_btn_description">tob bar right btn</string>
+    <string name="image_description">image</string>
+    <string name="author_text">Author</string>
+    <string name="source_text">Source</string>
+    <string name="published_text">Published: </string>
+</resources>

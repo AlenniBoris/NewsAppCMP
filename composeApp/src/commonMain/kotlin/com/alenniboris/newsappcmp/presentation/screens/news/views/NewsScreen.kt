@@ -1,4 +1,4 @@
-package com.alenniboris.newsappcmp.presentation.news.views
+package com.alenniboris.newsappcmp.presentation.screens.news.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -28,12 +28,14 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import com.alenniboris.newsappcmp.domain.util.GsonUtil.toJson
-import com.alenniboris.newsappcmp.presentation.details.views.DetailsScreen
-import com.alenniboris.newsappcmp.presentation.news.INewsScreenIntent
-import com.alenniboris.newsappcmp.presentation.news.NewsScreenViewModel
+import com.alenniboris.newsappcmp.presentation.screens.details.views.DetailsScreen
+import com.alenniboris.newsappcmp.presentation.screens.news.INewsScreenEvent
+import com.alenniboris.newsappcmp.presentation.screens.news.INewsScreenIntent
+import com.alenniboris.newsappcmp.presentation.screens.news.NewsScreenState
+import com.alenniboris.newsappcmp.presentation.screens.news.NewsScreenViewModel
 import com.alenniboris.newsappcmp.presentation.utils.views.AppSearchBar
 import com.alenniboris.newsappcmp.presentation.utils.views.ArticlePlaceholder
-import io.github.aakira.napier.Napier
+import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
@@ -52,17 +54,13 @@ class NewsScreen : Screen {
 
         val proceedIntent by remember { mutableStateOf(viewModel::proceedIntent) }
 
-        val articleFlow by remember { mutableStateOf(viewModel.articleFlow) }
+        val event by remember { mutableStateOf(viewModel.event) }
 
-        LaunchedEffect(articleFlow) {
+        LaunchedEffect(event) {
             launch {
-                articleFlow.collect { article ->
-                    Napier.e(
-                        tag = "!!!!",
-                        message = "uashxiuasxhi"
-                    )
+                event.filterIsInstance<INewsScreenEvent.NavigateToDetails>().collect { coming ->
                     navigator?.push(
-                        DetailsScreen(article.toJson())
+                        DetailsScreen(coming.article.toJson())
                     )
                 }
             }
@@ -73,6 +71,18 @@ class NewsScreen : Screen {
                 viewModel.dispose()
             }
         }
+
+        NewsScreenUi(
+            state = state,
+            proceedIntent = proceedIntent
+        )
+    }
+
+    @Composable
+    private fun NewsScreenUi(
+        state: NewsScreenState,
+        proceedIntent: (INewsScreenIntent) -> Unit
+    ) {
 
         Column {
 
@@ -116,7 +126,7 @@ class NewsScreen : Screen {
                     Column(
                         modifier = Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
                             text = "Nothing, reload"

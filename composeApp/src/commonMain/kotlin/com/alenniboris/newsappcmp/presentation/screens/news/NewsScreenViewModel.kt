@@ -1,9 +1,10 @@
-package com.alenniboris.newsappcmp.presentation.news
+package com.alenniboris.newsappcmp.presentation.screens.news
 
-import com.alenniboris.newsappcmp.domain.model.ArticleModelDomain
 import com.alenniboris.newsappcmp.domain.model.CustomResultModelDomain
 import com.alenniboris.newsappcmp.domain.usecase.logic.IGetNewsByQueryUseCase
 import com.alenniboris.newsappcmp.domain.util.SingleFlowEvent
+import com.alenniboris.newsappcmp.presentation.model.ArticleModelUi
+import com.alenniboris.newsappcmp.presentation.model.toUiModel
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,8 +29,8 @@ class NewsScreenViewModel(
     private val _screenState = MutableStateFlow(NewsScreenState())
     val state = _screenState.asStateFlow()
 
-    private val _articleFlow = SingleFlowEvent<ArticleModelDomain?>(_viewModelScope)
-    val articleFlow = _articleFlow.flow
+    private val _event = SingleFlowEvent<INewsScreenEvent>(_viewModelScope)
+    val event = _event.flow
 
     init {
         loadInitialData()
@@ -44,12 +45,14 @@ class NewsScreenViewModel(
         is INewsScreenIntent.NavigateToDetails -> navigateToDetails(intent.article)
     }
 
-    private fun navigateToDetails(article: ArticleModelDomain) {
+    private fun navigateToDetails(article: ArticleModelUi) {
         Napier.e(
             tag = "!!!!",
             message = "article"
         )
-        _articleFlow.emit(article)
+        _event.emit(
+            INewsScreenEvent.NavigateToDetails(article)
+        )
     }
 
     private fun loadByQuery(query: String) {
@@ -94,7 +97,7 @@ class NewsScreenViewModel(
                     val res = getNewsByQuery.invoke(query)
                 ) {
                     is CustomResultModelDomain.Success -> {
-                        _screenState.update { it.copy(articles = res.result) }
+                        _screenState.update { it.copy(articles = res.result.map { it.toUiModel() }) }
                     }
 
                     is CustomResultModelDomain.Error -> {
@@ -121,7 +124,7 @@ class NewsScreenViewModel(
                 is CustomResultModelDomain.Success -> {
                     _screenState.update {
                         it.copy(
-                            articles = res.result
+                            articles = res.result.map { it.toUiModel() }
                         )
                     }
                 }

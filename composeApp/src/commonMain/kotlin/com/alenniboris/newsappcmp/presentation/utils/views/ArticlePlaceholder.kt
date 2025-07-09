@@ -14,13 +14,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import com.alenniboris.newsappcmp.domain.model.ArticleModelDomain
+import com.alenniboris.newsappcmp.presentation.model.ArticleModelUi
+import newsappcmp.composeapp.generated.resources.Res
+import newsappcmp.composeapp.generated.resources.image_description
+import org.jetbrains.compose.resources.stringResource
 
 
 @Composable
 fun ArticlePlaceholder(
     modifier: Modifier,
-    article: ArticleModelDomain
+    article: ArticleModelUi
 ) {
 
     Column(
@@ -31,19 +34,19 @@ fun ArticlePlaceholder(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(25.dp)),
-            model = article.urlToImage,
-            contentDescription = "image",
+            model = article.domainModel.urlToImage,
+            contentDescription = stringResource(Res.string.image_description),
             contentScale = ContentScale.FillWidth
         )
 
         Text(
-            text = article.source.name,
+            text = article.domainModel.source.name,
             fontSize = 10.sp,
             textAlign = TextAlign.Center,
         )
 
         Text(
-            text = article.title,
+            text = article.domainModel.title,
             fontSize = 20.sp,
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.Bold,
@@ -51,7 +54,7 @@ fun ArticlePlaceholder(
         )
 
         Text(
-            text = article.description ?: "",
+            text = article.domainModel.description ?: "",
             fontSize = 20.sp,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(vertical = 15.dp)

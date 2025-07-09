@@ -1,14 +1,11 @@
 package com.alenniboris.newsappcmp
 
-import androidx.compose.runtime.remember
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import com.alenniboris.newsappcmp.di.commonModules
-import com.alenniboris.newsappcmp.domain.repository.INewsRepository
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import org.koin.core.context.startKoin
-import org.koin.mp.KoinPlatform.getKoin
 import java.util.Properties
 
 fun main() = application {

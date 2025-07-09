@@ -1,4 +1,4 @@
-package com.alenniboris.newsappcmp.presentation.details.views
+package com.alenniboris.newsappcmp.presentation.screens.saved.views
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,14 +13,13 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 
-data class DetailsScreen(
-    val articleJson: String
-) : Screen {
+class SavedScreen : Screen {
 
     @Composable
     override fun Content() {
 
-        val navigator = LocalNavigator.current
+        val parentNavigator = LocalNavigator.current
+        val navigator = parentNavigator?.parent ?: parentNavigator
 
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -28,16 +27,18 @@ data class DetailsScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Details, article = $articleJson"
+                text = "Saved"
             )
             Button(
                 modifier = Modifier.padding(top = 15.dp),
                 onClick = {
-                    navigator?.pop()
+//                    navigator?.push(
+//                        DetailsScreen(id = "15")
+//                    )
                 },
                 content = {
                     Text(
-                        text = "back from details"
+                        text = "details, id = 15"
                     )
                 }
             )

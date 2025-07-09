@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
-import com.alenniboris.newsappcmp.presentation.navigation.HomeScreenContainer
+import com.alenniboris.newsappcmp.presentation.screens.navigation.HomeScreenContainer
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
