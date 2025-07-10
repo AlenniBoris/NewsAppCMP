@@ -1,0 +1,13 @@
+package com.alenniboris.newsappcmp.domain.usecase.logic
+
+import com.alenniboris.newsappcmp.domain.model.ArticleModelDomain
+import com.alenniboris.newsappcmp.domain.model.CommonExceptionModelDomain
+import com.alenniboris.newsappcmp.domain.model.CustomResultModelDomain
+
+interface IUpdateArticleIsLikedUseCase {
+
+    suspend fun invoke(
+        article: ArticleModelDomain,
+        isLiked: Boolean
+    ): CustomResultModelDomain<Unit, CommonExceptionModelDomain>
+}

@@ -19,7 +19,6 @@ fun main() = application {
         load(stream)
     }
     System.setProperty("NEWS_API_KEY", apikeys.getProperty("NEWS_API_KEY") ?: "")
-
     startKoin {
         modules(commonModules)
     }
@@ -27,7 +26,7 @@ fun main() = application {
 
     Window(
         onCloseRequest = ::exitApplication,
-        title = "NewsAppCMP",
+        title = "NewsAppCMP"
     ) {
         App()
     }
