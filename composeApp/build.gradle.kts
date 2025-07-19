@@ -10,6 +10,9 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
     kotlin("plugin.serialization") version "2.2.0"
+
+    alias(libs.plugins.room)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -92,6 +95,10 @@ kotlin {
 
             //Gson
             implementation("com.google.code.gson:gson:2.9.0")
+
+            // Room
+            implementation(libs.androidx.room.runtime)
+            implementation(libs.sqlite.bundled)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -115,7 +122,14 @@ kotlin {
 
             // Icons
             implementation("androidx.compose.material3:material3:1.3.2")
+
+
         }
+    }
+
+    dependencies{
+        add("kspAndroid", libs.androidx.room.compiler.get())
+        add("kspDesktop", libs.androidx.room.compiler.get())
     }
 }
 
@@ -160,4 +174,12 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
+}
+
+
+dependencies {
+    ksp(libs.androidx.room.compiler)
+}
+room {
+    schemaDirectory("$projectDir/schemas")
 }

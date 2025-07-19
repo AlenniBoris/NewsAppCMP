@@ -3,11 +3,10 @@ package com.alenniboris.newsappcmp.domain.repository
 import com.alenniboris.newsappcmp.domain.model.ArticleModelDomain
 import com.alenniboris.newsappcmp.domain.model.CommonExceptionModelDomain
 import com.alenniboris.newsappcmp.domain.model.CustomResultModelDomain
-import kotlinx.coroutines.flow.Flow
 
 interface IDatabaseRepository {
 
-    fun getLikedNews(): Flow<List<ArticleModelDomain>>
+    suspend fun getLikedNews(): CustomResultModelDomain<List<ArticleModelDomain>, CommonExceptionModelDomain>
 
     suspend fun addArticleToDatabase(
         article: ArticleModelDomain

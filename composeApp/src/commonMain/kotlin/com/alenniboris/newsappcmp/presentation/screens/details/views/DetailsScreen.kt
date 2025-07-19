@@ -41,6 +41,8 @@ import newsappcmp.composeapp.generated.resources.Res
 import newsappcmp.composeapp.generated.resources.author_text
 import newsappcmp.composeapp.generated.resources.back_icon
 import newsappcmp.composeapp.generated.resources.image_description
+import newsappcmp.composeapp.generated.resources.liked_icon
+import newsappcmp.composeapp.generated.resources.not_liked_icon
 import newsappcmp.composeapp.generated.resources.nothing_found_text
 import newsappcmp.composeapp.generated.resources.published_text
 import newsappcmp.composeapp.generated.resources.source_text
@@ -56,10 +58,6 @@ data class DetailsScreen(
 
     @Composable
     override fun Content() {
-
-        LaunchedEffect(Unit) {
-            Napier.d(tag = "!!!!!", message = articleJson.fromJson<ArticleModelUi>().toString())
-        }
 
         val navigator = LocalNavigator.current
         val viewModel =
@@ -104,6 +102,13 @@ data class DetailsScreen(
                     proceedIntent(
                         IDetailsScreenIntent.NavigateBack
                     )
+                },
+                rightBtnPainter = painterResource(
+                    if (state.isLiked) Res.drawable.liked_icon
+                    else Res.drawable.not_liked_icon
+                ),
+                onRightBtnClicked = {
+                    proceedIntent(IDetailsScreenIntent.ProceedLikedAction)
                 }
             )
 

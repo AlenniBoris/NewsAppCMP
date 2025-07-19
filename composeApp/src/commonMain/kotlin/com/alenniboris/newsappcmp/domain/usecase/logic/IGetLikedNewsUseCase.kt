@@ -1,9 +1,10 @@
 package com.alenniboris.newsappcmp.domain.usecase.logic
 
 import com.alenniboris.newsappcmp.domain.model.ArticleModelDomain
-import kotlinx.coroutines.flow.SharedFlow
+import com.alenniboris.newsappcmp.domain.model.CommonExceptionModelDomain
+import com.alenniboris.newsappcmp.domain.model.CustomResultModelDomain
 
 interface IGetLikedNewsUseCase {
 
-    val likedFlow: SharedFlow<List<ArticleModelDomain>>
+    suspend fun invoke(): CustomResultModelDomain<List<ArticleModelDomain>, CommonExceptionModelDomain>
 }

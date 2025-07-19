@@ -1,6 +1,8 @@
 package com.alenniboris.newsappcmp.di
 
+import com.alenniboris.newsappcmp.domain.usecase.logic.IGetLikedNewsUseCase
 import com.alenniboris.newsappcmp.domain.usecase.logic.IGetNewsByQueryUseCase
+import com.alenniboris.newsappcmp.domain.usecase.logic.IUpdateArticleIsLikedUseCase
 import com.alenniboris.newsappcmp.presentation.model.ArticleModelUi
 import com.alenniboris.newsappcmp.presentation.screens.details.DetailsScreenViewModel
 import com.alenniboris.newsappcmp.presentation.screens.news.NewsScreenViewModel
@@ -16,7 +18,9 @@ val viewModelsModule = module {
 
     factory<DetailsScreenViewModel> { (article: ArticleModelUi) ->
         DetailsScreenViewModel(
-            article = article
+            article = article,
+            updateArticleIsLikedUseCase = get<IUpdateArticleIsLikedUseCase>(),
+            getLikedNewsUseCase = get<IGetLikedNewsUseCase>()
         )
     }
 }

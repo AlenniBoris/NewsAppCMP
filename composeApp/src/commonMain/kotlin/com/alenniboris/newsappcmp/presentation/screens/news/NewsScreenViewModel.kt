@@ -46,10 +46,6 @@ class NewsScreenViewModel(
     }
 
     private fun navigateToDetails(article: ArticleModelUi) {
-        Napier.e(
-            tag = "!!!!",
-            message = "article"
-        )
         _event.emit(
             INewsScreenEvent.NavigateToDetails(article)
         )
