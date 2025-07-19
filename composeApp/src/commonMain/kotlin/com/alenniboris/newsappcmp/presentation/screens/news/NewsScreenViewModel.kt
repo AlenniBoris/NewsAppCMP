@@ -77,7 +77,6 @@ class NewsScreenViewModel(
     }
 
     private fun searchInternal(query: String) {
-        Napier.d(tag = "!!!!", message = "query")
         _loadingJob = _viewModelScope.launch {
             _screenState.update {
                 it.copy(

@@ -22,7 +22,6 @@ class DatabaseRepositoryImpl(
                 val res = dao.getAllArticles().map { it.toModelDomain() }
                 return@withContext CustomResultModelDomain.Success(res)
             }.getOrElse {
-                Napier.e(tag = "!!!!", message = "error database getting all liked")
                 Napier.e(tag = "!!!!", message = it.stackTraceToString())
                 return@withContext CustomResultModelDomain.Error(
                     CommonExceptionModelDomain.DatabaseError
@@ -36,11 +35,9 @@ class DatabaseRepositoryImpl(
     ): CustomResultModelDomain<Unit, CommonExceptionModelDomain> =
         withContext(dispatchers.IO) {
             runCatching {
-                Napier.e(tag = "!!!!", message = "adding")
                 dao.addArticleToDatabase(article = article.toEntityModel())
                 return@withContext CustomResultModelDomain.Success(Unit)
             }.getOrElse {
-                Napier.e(tag = "!!!!", message = "error database adding liked")
                 return@withContext CustomResultModelDomain.Error(
                     CommonExceptionModelDomain.DatabaseError
                 )
@@ -52,11 +49,9 @@ class DatabaseRepositoryImpl(
     ): CustomResultModelDomain<Unit, CommonExceptionModelDomain> =
         withContext(dispatchers.IO) {
             runCatching {
-                Napier.e(tag = "!!!!", message = "deleting")
                 dao.deleteArticleFromDatabase(article = article.toEntityModel())
                 return@withContext CustomResultModelDomain.Success(Unit)
             }.getOrElse {
-                Napier.e(tag = "!!!!", message = "error database deleting liked")
                 return@withContext CustomResultModelDomain.Error(
                     CommonExceptionModelDomain.DatabaseError
                 )

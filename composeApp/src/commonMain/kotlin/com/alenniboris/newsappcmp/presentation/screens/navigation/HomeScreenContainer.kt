@@ -25,13 +25,8 @@ class HomeScreenContainer : Screen {
         Navigator(NewsScreen()) { innerNavigator ->
 
             val current = innerNavigator.lastItem
-            LaunchedEffect(Unit) {
-                Napier.d(tag = "!!!!", message = current.key)
-            }
             val isBottomBarVisible = innerNavScreensKeys.contains(current.key)
-            LaunchedEffect(Unit) {
-                Napier.d(tag = "!!!!", message = isBottomBarVisible.toString())
-            }
+
             Scaffold(
                 bottomBar = {
                     if (isBottomBarVisible) {

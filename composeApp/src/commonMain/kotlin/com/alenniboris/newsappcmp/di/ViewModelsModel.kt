@@ -6,6 +6,7 @@ import com.alenniboris.newsappcmp.domain.usecase.logic.IUpdateArticleIsLikedUseC
 import com.alenniboris.newsappcmp.presentation.model.ArticleModelUi
 import com.alenniboris.newsappcmp.presentation.screens.details.DetailsScreenViewModel
 import com.alenniboris.newsappcmp.presentation.screens.news.NewsScreenViewModel
+import com.alenniboris.newsappcmp.presentation.screens.saved.SavedScreenViewModel
 import org.koin.dsl.module
 
 val viewModelsModule = module {
@@ -20,6 +21,12 @@ val viewModelsModule = module {
         DetailsScreenViewModel(
             article = article,
             updateArticleIsLikedUseCase = get<IUpdateArticleIsLikedUseCase>(),
+            getLikedNewsUseCase = get<IGetLikedNewsUseCase>()
+        )
+    }
+
+    factory<SavedScreenViewModel> {
+        SavedScreenViewModel(
             getLikedNewsUseCase = get<IGetLikedNewsUseCase>()
         )
     }

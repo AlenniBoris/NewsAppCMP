@@ -34,7 +34,6 @@ import com.alenniboris.newsappcmp.presentation.screens.details.DetailsScreenView
 import com.alenniboris.newsappcmp.presentation.screens.details.IDetailsScreenEvent
 import com.alenniboris.newsappcmp.presentation.screens.details.IDetailsScreenIntent
 import com.alenniboris.newsappcmp.presentation.utils.views.AppTopBar
-import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.launch
 import newsappcmp.composeapp.generated.resources.Res

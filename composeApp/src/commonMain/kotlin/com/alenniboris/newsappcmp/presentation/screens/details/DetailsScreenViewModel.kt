@@ -35,16 +35,13 @@ class DetailsScreenViewModel(
 
     private fun loadLiked() {
         _viewModelScope.launch {
-            Napier.e(tag = "!!!!", message = "loading liked")
             when (
                 val res = getLikedNewsUseCase.invoke()
             ) {
                 is CustomResultModelDomain.Success -> {
-                    val contains = res.result.contains(_screenState.value.article?.domainModel)
-                    Napier.e(tag = "!!!!", message = contains.toString())
                     _screenState.update {
                         it.copy(
-                            isLiked = contains
+                            isLiked = res.result.contains(_screenState.value.article?.domainModel)
                         )
                     }
                 }
